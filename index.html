@@ -1,0 +1,59 @@
+const perguntas = [
+{
+enunciado: hoje fui a escola, logo que cheguei em casa resolvi fazer minhas tarefas",
+alternativas: [
+"começar estudando",
+"descansar um pouco"
+]
+},
+{
+enunciado: "após checar minhas tarefas, começei a escolher por ordem: [
+"começar pela primeira.",
+" não fazer, sair com os amigos."
+]
+},
+{
+enunciado: "estudar durante toda a tarde e aprender coisas novas: [
+"realmente estudar ",
+"ficar vendo filme e aproveitar a tarde dormindo"
+]
+},
+{
+enunciado: "Ao final da discussão, você precisou criar uma imagem no computador que representasse o que pensa sobre IA. E agora?",
+alternativas: [
+"Criar uma imagem utilizando uma plataforma de design como o Paint.",
+"Criar uma imagem utilizando um gerador de imagem de IA."
+]
+
+},
+{
+enunciado: "ir ao cinema e quando chegar dormir ou estudar?: [
+"dormir.",
+"estudar"
+]
+}
+];
+let atual = 0;
+let perguntaAtual;
+const caixaPerguntas = document.getElementById('caixaPerguntas');
+const alternativasContainer = document.getElementById('alternativas');
+function mostraPergunta() {
+perguntaAtual = perguntas[atual];
+caixaPerguntas.textContent = perguntaAtual.enunciado;
+alternativasContainer.innerHTML = '';
+perguntaAtual.alternativas.forEach((alternativa, index) => {
+const button = document.createElement('button');
+button.textContent = alternativa;
+button.addEventListener('click', () => {
+atual++;
+if (atual < perguntas.length) {
+mostraPergunta();
+} else {
+caixaPerguntas.textContent = 'Você completou o questionário!';
+alternativasContainer.innerHTML = '';
+}
+});
+alternativasContainer.appendChild(button);
+});
+}
+mostraPergunta();
